@@ -1,0 +1,13 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    padding: 25px;
+}
+
+li {
+    padding-left: 30px;
+}
+a {
+    text-decoration: none;
+}
