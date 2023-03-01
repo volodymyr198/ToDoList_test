@@ -1,4 +1,8 @@
-const DetailsToDo = ({ title, description, closeModal }) => {
+// import { useState } from 'react';
+
+const DetailsToDo = ({ title, description, status }) => {
+    console.log(status);
+
     return (
         <>
             <h2>{title}</h2>
@@ -8,11 +12,8 @@ const DetailsToDo = ({ title, description, closeModal }) => {
             <p>{description}</p>
             <p>
                 Status
-                <input type="checkbox" />
+                <input type="checkbox" checked={status} />
             </p>
-            <button type="button" onClick={closeModal}>
-                close
-            </button>
         </>
     );
 };

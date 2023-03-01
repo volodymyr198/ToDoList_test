@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import { nanoid } from 'nanoid';
 
 const initialState = {
     items: [
@@ -24,7 +23,7 @@ export const todoSlice = createSlice({
             reducer: (state, action) => {
                 state.items.push(action.payload);
             },
-            prepare: (title, description, status) => {
+            prepare: (title, description) => {
                 return { payload: { title, description, status: false } };
             },
         },

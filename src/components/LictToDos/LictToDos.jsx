@@ -10,20 +10,22 @@ const ListToDos = () => {
     const [showModal, setShowModal] = useState(false);
 
     const todos = useSelector(state => state.todos.items);
-    console.log(todos.status);
 
-    console.log(showModal);
-    const showToDo = (title, description) => {
-        setToDoDetails(title, description);
+    const showToDo = ({ title, description }) => {
+        setToDoDetails({ title, description });
         setShowModal(true);
     };
-    console.log(toDoDetails);
 
     const closeModal = () => {
         setShowModal(false);
         setToDoDetails(null);
     };
 
+    // const [isChecked, setIsChecked] = useState(false);
+    // const handleCheckboxChange = e => {
+    //     setIsChecked(e.target.checked);
+    // };
+    // console.log(isChecked);
     return (
         <div>
             <div className={style.wrapper}>
@@ -33,21 +35,28 @@ const ListToDos = () => {
                 <p>STATUS</p>
             </div>
             <ol>
-                {todos.map(({ title, description }, index) => (
+                {todos.map(({ title, description, status }, index) => (
                     <li className={style.li} key={index}>
                         <a
                             href="/"
-                            onClick={() => showToDo(title, description)}
+                            onClick={e => {
+                                e.preventDefault();
+                                showToDo({ title, description });
+                            }}
                         >
                             <span>{title}</span> <span>{description}</span>
                         </a>
-                        <input type="checkbox" />
+                        <input
+                            // onChange={handleCheckboxChange}
+                            // checked={isChecked}
+                            type="checkbox"
+                        />
                     </li>
                 ))}
             </ol>
             {showModal && (
-                <Modal close={closeModal}>
-                    <DetailsToDo {...toDoDetails} closeModal={closeModal} />
+                <Modal closeModal={closeModal}>
+                    <DetailsToDo {...toDoDetails} />
                 </Modal>
             )}
         </div>

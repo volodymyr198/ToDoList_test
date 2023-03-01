@@ -17,7 +17,6 @@ function FormToDo() {
             return;
         }
         dispatch(addToDo(title, description));
-        console.log(title, description);
         form.reset();
     };
 
