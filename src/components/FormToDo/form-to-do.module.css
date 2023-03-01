@@ -1,14 +1,32 @@
-form {
+.form {
+    position: relative;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
+    width: 700px;
     gap: 30px;
 }
 
-label {
+.label {
     display: flex;
     flex-direction: column;
 }
 
-input {
+.input {
     margin-top: 10px;
+    width: 250px;
+}
+
+.error {
+    border: 1px solid red;
+}
+
+.errorMessage {
+    position: absolute;
+    top: 50px;
+    color: red;
+}
+.btn {
+    position: absolute;
+    right: 20px;
+    bottom: 0px;
 }

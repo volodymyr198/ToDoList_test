@@ -1,8 +1,5 @@
 .wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 40px;
-    padding: 25px;
+    padding: 40px;
 }
 
 li {
@@ -10,4 +7,9 @@ li {
 }
 a {
     text-decoration: none;
+}
+
+table {
+    text-align: center;
+    min-width: 600px;
 }
