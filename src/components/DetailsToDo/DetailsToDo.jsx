@@ -16,7 +16,6 @@ const DetailsToDo = ({ id }) => {
 
         dispatch(detailsToDo({ id, status: isChecked }));
     };
-
     return (
         <>
             <h2 className={styles.detailsTitle}>{title}</h2>
@@ -40,3 +39,29 @@ DetailsToDo.propTypes = {
 };
 
 export default DetailsToDo;
+
+// --------------непереключаемый инпут-------------------------
+
+// const DetailsToDo = ({ id }) => {
+//     const { title, description, status } = useSelector(state =>
+//         state.todos.items.find(todo => todo.id === id)
+//     );
+
+//     return (
+//         <>
+//             <h2 className={styles.detailsTitle}>{title}</h2>
+//             <h3>Description:</h3>
+//             <p>{description}</p>
+//             <p>
+//                 Status:
+//                 <input
+//                     className={styles.detailsCheck}
+//                     readOnly
+//                     type="checkbox"
+//                     checked={status}
+//                 />
+//             </p>
+//         </>
+//     );
+// };
+// export default DetailsToDo;

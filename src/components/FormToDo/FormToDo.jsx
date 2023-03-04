@@ -26,8 +26,6 @@ function FormToDo() {
         if (title && description) {
             dispatch(addToDo(title, description));
             form.reset();
-            setTitleError(false);
-            setDescriptionError(false);
         }
     };
 
@@ -40,7 +38,6 @@ function FormToDo() {
             setDescriptionError(false);
         }
     };
-
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
             <label className={styles.label}>

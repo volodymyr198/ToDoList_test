@@ -8,7 +8,6 @@ import styles from './list-to-dos.module.css';
 
 const ListToDos = () => {
     const [toDoDetails, setToDoDetails] = useState(null);
-    const [showModal, setShowModal] = useState(false);
 
     const todos = useSelector(state => state.todos.items);
 
@@ -16,11 +15,9 @@ const ListToDos = () => {
 
     const handleTaskClick = (id, title, description, status) => {
         setToDoDetails({ id, title, description, status });
-        setShowModal(true);
     };
 
     const closeModal = () => {
-        setShowModal(false);
         setToDoDetails(null);
     };
 
@@ -28,10 +25,21 @@ const ListToDos = () => {
         dispatch(detailsToDo({ id, status }));
     };
 
+    const handleTableClick = event => {
+        const checkbox = event.target.closest('input[type="checkbox"]');
+        const tr = event.target.closest('tr');
+        if (!checkbox && tr) {
+            const id = tr.getAttribute('data-id');
+            const todo = todos.find(todo => todo.id === id);
+
+            handleTaskClick(todo.id, todo.title, todo.description, todo.status);
+        }
+    };
+
     return (
         <>
             <div className={styles.wrapper}>
-                <table>
+                <table onClick={handleTableClick}>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -43,20 +51,7 @@ const ListToDos = () => {
                     <tbody>
                         {todos.map(
                             ({ id, title, description, status }, index) => (
-                                <tr
-                                    onClick={e => {
-                                        if (e.target.type === 'checkbox') {
-                                            return;
-                                        }
-                                        handleTaskClick(
-                                            id,
-                                            title,
-                                            description,
-                                            status
-                                        );
-                                    }}
-                                    key={index}
-                                >
+                                <tr key={index} data-id={id}>
                                     <td>{index + 1}.</td>
                                     <td>{title}</td>
                                     <td>{description}</td>
@@ -79,7 +74,7 @@ const ListToDos = () => {
                     </tbody>
                 </table>
 
-                {showModal && (
+                {toDoDetails && (
                     <Modal closeModal={closeModal}>
                         <DetailsToDo {...toDoDetails} />
                     </Modal>
