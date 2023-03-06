@@ -25,21 +25,10 @@ const ListToDos = () => {
         dispatch(detailsToDo({ id, status }));
     };
 
-    const handleTableClick = event => {
-        const checkbox = event.target.closest('input[type="checkbox"]');
-        const tr = event.target.closest('tr');
-        if (!checkbox && tr) {
-            const id = tr.getAttribute('data-id');
-            const todo = todos.find(todo => todo.id === id);
-
-            handleTaskClick(todo.id, todo.title, todo.description, todo.status);
-        }
-    };
-
     return (
         <>
             <div className={styles.wrapper}>
-                <table onClick={handleTableClick}>
+                <table>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -51,7 +40,20 @@ const ListToDos = () => {
                     <tbody>
                         {todos.map(
                             ({ id, title, description, status }, index) => (
-                                <tr key={index} data-id={id}>
+                                <tr
+                                    onClick={e => {
+                                        if (e.target.type === 'checkbox') {
+                                            return;
+                                        }
+                                        handleTaskClick(
+                                            id,
+                                            title,
+                                            description,
+                                            status
+                                        );
+                                    }}
+                                    key={index}
+                                >
                                     <td>{index + 1}.</td>
                                     <td>{title}</td>
                                     <td>{description}</td>
